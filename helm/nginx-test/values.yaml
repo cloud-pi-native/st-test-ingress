@@ -13,15 +13,7 @@ service:
   port: 80
   targetPort: 8080
 
-ingress:
-  enabled: true
-  className: ""
-  annotations: {}
-  hosts:
-    - host: nginx-test.example.com
-      paths:
-        - path: /
-          pathType: Prefix
+host: nginx-test.example.com
 
 resources:
   requests:
