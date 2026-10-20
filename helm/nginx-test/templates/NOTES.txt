@@ -1,0 +1,12 @@
+NGINX test deployment is installed.
+
+{{- if .Values.route.enabled }}
+OpenShift Route:
+  oc get route {{ include "nginx-test.fullname" . }} -n {{ .Release.Namespace }}
+{{- else if .Values.ingress.enabled }}
+Ingress:
+  kubectl get ingress {{ include "nginx-test.fullname" . }} -n {{ .Release.Namespace }}
+{{- else }}
+No external HTTP resource is enabled. Use port-forward:
+  oc port-forward svc/{{ include "nginx-test.fullname" . }} 8080:{{ .Values.service.port }} -n {{ .Release.Namespace }}
+{{- end }}

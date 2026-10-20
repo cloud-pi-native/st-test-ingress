@@ -1,0 +1,51 @@
+replicaCount: 2
+
+image:
+  repository: registry.example.com/demo/nginx-test
+  tag: "1.0.0"
+  pullPolicy: IfNotPresent
+
+nameOverride: ""
+fullnameOverride: ""
+
+service:
+  type: ClusterIP
+  port: 80
+  targetPort: 8080
+
+ingress:
+  enabled: true
+  className: ""
+  annotations: {}
+  hosts:
+    - host: nginx-test.example.com
+      paths:
+        - path: /
+          pathType: Prefix
+
+resources:
+  requests:
+    cpu: 25m
+    memory: 32Mi
+  limits:
+    cpu: 200m
+    memory: 128Mi
+
+probes:
+  startup:
+    enabled: true
+    initialDelaySeconds: 0
+    periodSeconds: 2
+    timeoutSeconds: 1
+    failureThreshold: 30
+  readiness:
+    initialDelaySeconds: 0
+    periodSeconds: 5
+    timeoutSeconds: 1
+    failureThreshold: 3
+  liveness:
+    initialDelaySeconds: 0
+    periodSeconds: 10
+    timeoutSeconds: 1
+    failureThreshold: 3
+
