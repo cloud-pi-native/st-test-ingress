@@ -16,6 +16,8 @@ spec:
         app.kubernetes.io/name: {{ include "nginx-test.name" . }}
         app.kubernetes.io/instance: {{ .Release.Name }}
     spec:
+      imagePullSecrets:
+        - name: "registry-pull-secret"
       containers:
         - name: nginx
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"

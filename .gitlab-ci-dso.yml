@@ -26,7 +26,7 @@ read_secret:
 docker-build:
   variables:
     WORKING_DIR: "image"
-    IMAGE_NAME: st-nginx
+    IMAGE_NAMES: st-nginx
   stage: docker-build
   needs:
     - read_secret
